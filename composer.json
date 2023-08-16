@@ -1,0 +1,15 @@
+{
+    "name": "acer/4",
+    "autoload": {
+        "psr-4": {
+            "Acer\\4\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Paulo Telli",
+            "email": "paulojtelli@gmail.com"
+        }
+    ],
+    "require": {}
+}

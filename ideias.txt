@@ -1,0 +1,9 @@
+opcao de atualizar pagamentos varios de uma vez na lista
+
+IMPLEMENTAR TRATAMENTO DE DADOS!!!!!
+
+fazer pagina ap locados - feito
+
+historico de pagamento
+
+cadastro de apartamento
