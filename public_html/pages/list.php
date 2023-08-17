@@ -98,6 +98,7 @@
     <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse"
         role="button" aria-expanded="true" aria-controls="collapseCardExample">
         <h6 class="m-0 font-weight-bold text-primary" >Cadastrar Novo Apartamento</h6>
+
     </a>
     <!-- Card Content - Collapse -->
     <div class="collapse hide" id="collapseCardExample">
@@ -124,26 +125,7 @@ $imagens = glob($dir . "*.{jpg,jpeg,png,gif}", GLOB_BRACE);
             </div>
             <div class="form-group">
                         <label for="foto_ap">Foto:</label>
-                        <select class="form-control" id="foto_ap" name="foto_ap">
-                            <?php foreach ($imagens as $imagem): ?>
-                                <option value="<?php echo str_replace($dir, '/img/', $imagem); ?>">
-                                    <?php echo basename($imagem); ?>
-                                </option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-                    <p>era pra ta aqui</p>
-                    <img id="imagem_selecionada" src="" />
-
-                    <script>
-    $(document).ready(function(){
-        // Quando uma nova opção for selecionada
-        $('#foto_ap').change(function(){
-            // Atualizar o atributo 'src' da imagem com o novo valor
-            $('#imagem_selecionada').attr('src', $(this).val());
-        });
-    });
-    </script>
+                        <?php echo image_selector(); ?>
             <button type="submit" class="btn btn-primary">Cadastrar</button>
         </form>
     </div>

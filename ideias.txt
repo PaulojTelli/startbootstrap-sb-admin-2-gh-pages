@@ -7,3 +7,5 @@ fazer pagina ap locados - feito
 historico de pagamento
 
 cadastro de apartamento
+
+parte do inquilino

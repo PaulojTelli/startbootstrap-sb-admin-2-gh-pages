@@ -8,7 +8,7 @@ require "app/functions/listV.php";
 require "app/functions/novoMes.php";
 require "app/functions/funcoes.php";
 require "app/functions/conn.php";
-require "app/functions/seletorImagem.php";
+require "app/functions/fotoAp.php";
 
 ?>
 

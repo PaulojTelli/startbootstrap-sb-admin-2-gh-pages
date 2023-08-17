@@ -1,4 +1,4 @@
-<?php require  $_SERVER['DOCUMENT_ROOT'] . '/bootstrap.php' ?>
+<?php require $_SERVER['DOCUMENT_ROOT'] . '/bootstrap.php' ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,12 +25,24 @@
     <link href='/css/sb-admin-2.min.css' rel="stylesheet">
 
     <!-- Custom styles for this page -->
-    <link href='/vendor/datatables/dataTables.bootstrap4.min.css' rel="stylesheet">
+    <!-- <link href='/vendor/datatables/dataTables.bootstrap4.min.css' rel="stylesheet"> -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <script>
+        function selecionarImagem(imagem, filename) {
+            document.getElementById("miniatura").src = imagem;
+            document.getElementById(filename).checked = true;
+        }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 
 </head>
 <?php
-    $servername = "localhost";
-    $username = "root";
-    $password = "@Sucesso2023@";
-    $dbname = "control";
-    ?>
+$servername = "localhost";
+$username = "root";
+$password = "@Sucesso2023@";
+$dbname = "control";
+?>
+
