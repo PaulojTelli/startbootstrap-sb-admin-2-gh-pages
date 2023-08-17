@@ -1,15 +1,15 @@
-<?php require  $_SERVER['DOCUMENT_ROOT'] . '/public_html\pages\header.php' ?>
+<?php require $_SERVER['DOCUMENT_ROOT'] . '/public_html\pages\header.php' ?>
 <?php
- //parametros do DB
- global $servername,$username,$password,$dbname;
- $apartamento = $_POST['apartamento'];
- $endereco = $_POST['endereco'];
- $locado = 0;
- $preco = $_POST['preco'];
- $foto_ap = $_POST['foto_ap'];
- if (!$foto_ap) {
-  $foto_ap = "\img\residential.png";
- }
+//parametros do DB
+global $servername, $username, $password, $dbname;
+$apartamento = $_POST['apartamento'];
+$endereco = $_POST['endereco'];
+$locado = 0;
+$preco = $_POST['preco'];
+$foto_ap = $_POST['foto_ap'];
+if (!$foto_ap) {
+    $foto_ap = "/img/fotoAp/residential.png";
+}
 
 
 
@@ -26,13 +26,13 @@ try {
     $stmt->bindParam(':preco', $preco);
     $stmt->bindParam(':foto_ap', $foto_ap);
     $stmt->execute();
+    echo "Deu boa";
 
-
-} catch(PDOException $e) {
+} catch (PDOException $e) {
     echo "Error: " . $e->getMessage();
 }
 
 $conn = null;
 
 ?>
-<script>window.history.back();</script>
+<!-- <script>window.history.back();</script> -->

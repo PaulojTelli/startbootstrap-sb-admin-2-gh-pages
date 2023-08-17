@@ -34,7 +34,7 @@ if ($result !== false) {
       <div class='container'>
         <div class='row'>
           <div class='col-md-3'>
-            <img src='\img\fotoAp/residential.png' class='img-fluid' alt='Foto do apartamento'>
+            <img src='\img\fotoAp/<?php echo $result['foto_ap'] ?>' class='img-fluid' alt='Foto do apartamento'>
           </div>
           <div class='col-md-9'>
 

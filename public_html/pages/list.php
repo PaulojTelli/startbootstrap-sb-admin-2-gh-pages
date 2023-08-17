@@ -125,12 +125,14 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="preco">Preço:</label>
-                                                    <input type="text" class="form-control" id="preco" name="preco"
+                                                    <input type="number" class="form-control" id="preco" name="preco"
                                                         required>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="foto_ap">Foto:</label>
-                                                    <?php echo fotoAp(); ?>
+                                                    <label for="foto_ap">
+                                                        <?php echo fotoAp(); ?>
+                                                    </label>
+
                                                     <button type="submit" class="btn btn-primary">Cadastrar</button>
                                             </form>
                                         </div>
