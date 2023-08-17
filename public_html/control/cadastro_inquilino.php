@@ -1,11 +1,11 @@
-<?php require  $_SERVER['DOCUMENT_ROOT'] . '/public_html\pages\header.php' ?>
+<?php require $_SERVER['DOCUMENT_ROOT'] . '/public_html\pages\header.php' ?>
 <?php
- //parametros do DB
- global $servername,$username,$password,$dbname;
-var_dump($_POST);
+//parametros do DB
+global $servername, $username, $password, $dbname;
+
 
 try {
-   $pdo = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+    $pdo = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     $nome = $_POST['nome'];
@@ -41,11 +41,11 @@ try {
     $stmt->bindParam(':dia_pagamento', $dia_pagamento);
     $stmt->execute();
 
-} catch(PDOException $e) {
+} catch (PDOException $e) {
     echo "Error: " . $e->getMessage();
 }
 
 $conn = null;
 
 ?>
-<!-- <script>window.history.back();</script> -->
+<script>window.history.back();</script>

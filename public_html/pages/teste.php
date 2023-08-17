@@ -1,20 +1,20 @@
-<?php require  'header.php' ?>
+<?php require 'header.php' ?>
+<?php require 'sidebar.php' ?>
 
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
 
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
-</head>
-<body>
-    <div class="container">
-        <h1>Formulário</h1>
-        <form action="processar.php" method="post">
-            <?php echo image_selector(); ?>
-            <!-- resto do seu formulário -->
-        </form>
+<form action="" method="post">
+    <div class="form-group">
+        <label for="nome">id inquilino</label>
+        <input type="text" class="form-control" name="id_inquilino" placeholder="Digite seu nome">
     </div>
-    <!-- resto do seu HTML -->
-</body>
-</html>
+    <div class="form-group">
+        <label for="email">id ap</label>
+        <input type="text" class="form-control" name="id_apartamento" placeholder="Digite seu e-mail">
+    </div>
+    <button type="submit" class="btn btn-primary">Enviar</button>
+</form>
+<?php
+// historicoPagamentoApI()
+historicoPagamentoAp()
+    ?>
+

@@ -112,12 +112,18 @@ function historicoPagamentoInq()
 
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+    $nomeInquilino = $result[0]['nome_inquilino'];
+    $sobrenomeInquilino = $result[0]['sobrenome_inquilino'];
+
+    echo '<div>';
+    echo '<h3>Historio de pagamento do inquilino:' . $nomeInquilino . ' ' . $sobrenomeInquilino . '</h3>';
+
     echo '<table class="table">';
     echo '<thead class="thead-dark">';
     echo '<tr>';
-    echo '<th>Nome</th>';
-    echo '<th>Sobrenome</th>';
+
     echo '<th>Apartamento</th>';
+    echo '<th>Mes Referente</th>';
     echo '<th>Quantia Paga</th>';
     echo '<th>Quantia Devida</th>';
     echo '<th>Atrasados</th>';
@@ -126,14 +132,14 @@ function historicoPagamentoInq()
     echo '<tbody>';
 
     foreach ($result as $row) {
-      $class = ($row['Quantia_Devida'] > 0) ? 'table-danger' : 'table-success';
+      $class = ($row['quantia_devida'] > $row['quantia_paga']) ? 'table-danger' : 'table-success';
       echo '<tr class="' . $class . '">';
-      echo '<td>' . $row['nome_inquilino'] . '</td>';
-      echo '<td>' . $row['sobrenome_inquilino'] . '</td>';
+
       echo '<td>' . $row['apartamento'] . '</td>';
-      echo '<td>' . $row['Quantia_Paga'] . '</td>';
-      echo '<td>' . $row['Quantia_Devida'] . '</td>';
-      echo '<td>' . $row['Quantia_Acumulada'] . '</td>';
+      echo '<td>' . $row['mes_referente'] . '</td>';
+      echo '<td>' . $row['quantia_paga'] . '</td>';
+      echo '<td>' . $row['quantia_devida'] . '</td>';
+      echo '<td>' . $row['quantia_devida_acumulada'] . '</td>';
       echo '</tr>';
     }
 
@@ -207,13 +213,13 @@ function historicoPagamentoAp()
 function listarInquilinos()
 {
   try {
-    global $servername, $username, $password, $dbname;
+    global $servername, $username, $password, $dbname, $id;
 
     $conexao = new PDO("mysql:host=$servername;dbname=$dbname", "$username", "$password");
     // Define o modo de erro do PDO para exceção
     $conexao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $sql = "SELECT id, nome, sobrenome, telefone, foto_in FROM inquilinos";
+    $sql = "SELECT id as id_inquilino, nome, sobrenome, telefone, foto_in FROM inquilinos";
     $stmt = $conexao->prepare($sql);
     $stmt->execute();
 
@@ -225,10 +231,11 @@ function listarInquilinos()
 
       foreach ($result as $row) {
         if ($row['nome'] != "") {
-          echo '<tr onclick="document.getElementById(\'form' . $row['id'] . '\').submit();">';
-          echo '<form id="form' . $row['id'] . '" method="post" action="/public_html\control\cadastro_inquilo_apartamento.php">';
-          echo '<input type="hidden" name="id" value="' . $row['id'] . '">';
-          echo '<td>' . $row['id'] . '</td><td>' . $row['nome'] . '</td><td>' . $row['sobrenome'] . '</td><td>' . $row['telefone'] . '</td><td><img src="' . $row['foto_in'] . '" alt="Foto" class="img-thumbnail" width="20"/></td>';
+          echo '<tr onclick="document.getElementById(\'form' . $row['id_inquilino'] . '\').submit();">';
+          echo '<form id="form' . $row['id_inquilino'] . '" method="post" action="/public_html\control\cadastro_inquilo_apartamento.php">';
+          echo '<input type="hidden" name="id_inquilino" value="' . $row['id_inquilino'] . '">';
+          echo '<input type="hidden" name="id_apartamento" value="' . $id . '">';
+          echo '<td>' . $row['id_inquilino'] . '</td><td>' . $row['nome'] . '</td><td>' . $row['sobrenome'] . '</td><td>' . $row['telefone'] . '</td><td><img src="' . $row['foto_in'] . '" alt="Foto" class="img-thumbnail" width="20"/></td>';
           echo '</form>';
           echo '</tr>';
         }
