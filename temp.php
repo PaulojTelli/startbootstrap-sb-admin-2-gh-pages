@@ -1,7 +1,4 @@
-<?php
 
-function seletorImagem(){
-  echo"
   <!-- <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'> -->
   <!-- <script src='https://code.jquery.com/jquery-3.6.0.min.js'></script> -->
   <!-- <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js'></script> -->
@@ -65,7 +62,7 @@ function seletorImagem(){
   <script>
     $(document).ready(function(){
       $.ajax({
-        url : '"; $_SERVER['DOCUMENT_ROOT'];echo"/img/',
+        url : '/img/',
         success: function (data) {
           $(data).find('a').attr('href', function (i, val) {
             if( val.match(/\.(jpe?g|png|gif)$/) ) {
@@ -85,5 +82,3 @@ function seletorImagem(){
 
 </body>
 </html>
-";
-}

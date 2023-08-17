@@ -1,5 +1,83 @@
-<?php require  'header.php' ?>
-<?php require  'sidebar.php'?>
+<?php require  $_SERVER['DOCUMENT_ROOT'] . '/bootstrap.php' ?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" href="<?php $_SERVER['DOCUMENT_ROOT'] . 'css\style.css' ?>">
+    <script src="https://kit.fontawesome.com/35ca44fdca.js" crossorigin="anonymous"></script>
+
+
+    <title>Controle de Aluguéis</title>
+
+    <!-- Custom fonts for this template -->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href='/css/sb-admin-2.min.css' rel="stylesheet">
+
+    <!-- Custom styles for this page -->
+    <link href='/vendor/datatables/dataTables.bootstrap4.min.css' rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <i class="fas fa-laugh-wink"></i>
+                </div>
+                <div class="sidebar-brand-text mx-3">Imobiliaria</div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item">
+                <a class="nav-link" href="index.html">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Início</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Separador
+            </div>
+
+            <li class="nav-item">
+                <a class="nav-link" href="<?php $_SERVER['DOCUMENT_ROOT'] . '/list.php?categoria=todos' ?>">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>Controle</span></a>
+            </li>
+
+
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+
+        </ul>
+        <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -10,8 +88,14 @@
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
+
+
+
+
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
+
+
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
@@ -64,8 +148,24 @@
                         <div class="card-header py-3">
 
 
-                        <!-- menu antes da lista -->
+                        <!-- opcoes antes da lista -->
                         <!-- categorias -->
+
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+                    aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>Categorias</span>
+                </a>
+                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+
+                        <!-- <a class="collapse-item" type="submit" name="categoria" value="todos">Todos</a>
+                        <a class="collapse-item" type="submit" name="categoria" value="pago">Pagos</a>
+                        <a class="collapse-item" type="submit" name="categoria" value="atrasado">Atrasados</a>
+                        <a class="collapse-item" type="submit" name="categoria" value="naoVencido">Não Vencido</a>
+                        <a class="collapse-item"  type="submit" name="categoria" value="vago">Vagos</a> -->
+
 
                          <form method="get" action="list.php">
                         <button class="btn btn-primary" type="submit" name="categoria" value="todos">Todos</button>
@@ -75,9 +175,9 @@
                         <button class="btn btn-primary" type="submit" name="categoria" value="vago">Vagos</button>
                     </form>
                     </div>
+                </div>
 
-                    <div class="bg-white py-2 collapse-inner rounded">
-
+                <!-- funcoes -->
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFuncoes"
                     aria-expanded="true" aria-controls="collapseFuncoes">
                     <i class="fas fa-fw fa-wrench"></i>
@@ -87,86 +187,11 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
 
-                    <form method="post" id="novo_mes_form">
+                    <form method="post">
                     <button type="submit" class="btn btn-primary mb-2" name="executar_funcao">Iniciar Novo Mês <i class="fa-regular fa-calendar-check"></i></button>
     </form>
 
-    <!-- card cadastro ap -->
-    <div class="card shadow mb-4" style="margin-top:25px;
-   ">
-    <!-- Card Header - Accordion -->
-    <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse"
-        role="button" aria-expanded="true" aria-controls="collapseCardExample">
-        <h6 class="m-0 font-weight-bold text-primary" >Cadastrar Novo Apartamento</h6>
-    </a>
-    <!-- Card Content - Collapse -->
-    <div class="collapse hide" id="collapseCardExample">
-        <div class="card-body">
-
-        <?php
-$dir = $_SERVER['DOCUMENT_ROOT'] . '/img/';
-$imagens = glob($dir . "*.{jpg,jpeg,png,gif}", GLOB_BRACE);
-?>
-    <div class="container">
-        <h1>Cadastro de Apartamento</h1>
-        <form action="\public_html\control\cadastro_apartamento.php" method="post">
-            <div class="form-group">
-                <label for="apartamento">Apartamento:</label>
-                <input type="text" class="form-control" id="apartamento" name="apartamento" required>
-            </div>
-            <div class="form-group">
-                <label for="endereco">Endereço:</label>
-                <input type="text" class="form-control" id="endereco" name="endereco" required>
-            </div>
-            <div class="form-group">
-                <label for="preco">Preço:</label>
-                <input type="text" class="form-control" id="preco" name="preco" required>
-            </div>
-            <div class="form-group">
-                        <label for="foto_ap">Foto:</label>
-                        <select class="form-control" id="foto_ap" name="foto_ap">
-                            <?php foreach ($imagens as $imagem): ?>
-                                <option value="<?php echo str_replace($dir, '/img/', $imagem); ?>">
-                                    <?php echo basename($imagem); ?>
-                                </option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-                    <p>era pra ta aqui</p>
-                    <img id="imagem_selecionada" src="" />
-
-                    <script>
-    $(document).ready(function(){
-        // Quando uma nova opção for selecionada
-        $('#foto_ap').change(function(){
-            // Atualizar o atributo 'src' da imagem com o novo valor
-            $('#imagem_selecionada').attr('src', $(this).val());
-        });
-    });
-    </script>
-            <button type="submit" class="btn btn-primary">Cadastrar</button>
-        </form>
-    </div>
-
-
-
-
-</div>
-        </div>
-    </div>
-<!-- fim card cadastro ap -->
-
-
-    <script type="text/javascript">
-    document.getElementById("novo_mes_form").addEventListener("submit", function(event){
-        var result = confirm("Tem certeza que deseja iniciar um novo mês?");
-        if (!result) {
-            event.preventDefault();
-        }
-    });
-</script>
-
-   <?php
+    <?php
     if (isset($_POST['executar_funcao'])) {
         novoMes();
     } ?>
@@ -185,12 +210,12 @@ $imagens = glob($dir . "*.{jpg,jpeg,png,gif}", GLOB_BRACE);
 
 
                                <?php
-                            //    atualizaVago();
+                               atualizaVago();
                                 if (isset($_GET['categoria'])) {
                                     // Obtém o valor do botão clicado
                                     $mostrar = $_GET['categoria'];
 
-                                    // Executa a função certa usando switch case
+                                    // Executa a função apropriada usando switch case
                                     switch ($mostrar) {
                                         case 'todos':
                                            listT();
@@ -208,9 +233,7 @@ $imagens = glob($dir . "*.{jpg,jpeg,png,gif}", GLOB_BRACE);
                                             ListV();
                                             break;
                                         default:
-                                            listT();
-                                            break;
-
+                                            echo "Função desconhecida";
                                     }
                                 }
 
@@ -270,21 +293,21 @@ $imagens = glob($dir . "*.{jpg,jpeg,png,gif}", GLOB_BRACE);
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="/vendor/jquery/jquery.min.js"></script>
-    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="/js/sb-admin-2.min.js"></script>
+    <script src="js/sb-admin-2.min.js"></script>
 
     <!-- Page level plugins -->
-    <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
     <!-- Page level custom scripts -->
-    <script src="/js/demo/datatables-demo.js"></script>
+    <script src="js/demo/datatables-demo.js"></script>
 
 </body>
 
