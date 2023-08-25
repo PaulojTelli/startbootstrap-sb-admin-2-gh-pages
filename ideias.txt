@@ -1,11 +1,31 @@
-opcao de atualizar pagamentos varios de uma vez na lista
+#### a fazer
 
-IMPLEMENTAR TRATAMENTO DE DADOS!!!!!
 
-fazer pagina ap locados - feito
+opcao de atualizar varios pagamentos de uma vez na lista
 
-historico de pagamento
+IMPLEMENTAR TRATAMENTO DE DADOS!!!!! -feito em só em um form(copiar para os outros)
 
-cadastro de apartamento
+historico de pagamento - feito só no db
 
-parte do inquilino
+lista de inquilinos
+
+pagina de consulta dos inquilinos (ver aluguel, vencimento, histórico, contato, pagar aluguel)
+
+sistema de login
+
+
+
+##### feitos
+
+cadastro de apartamento - feito
+
+fazer pagina ap locados - feito(nao lembro oq é isso)
+
+
+
+
+
+
+
+
+

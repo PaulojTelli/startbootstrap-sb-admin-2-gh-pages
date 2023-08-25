@@ -2,7 +2,7 @@
 function fotoAp($dir = '../../img/fotoAp/')
 {
     $files = scandir($dir);
-    $output = '<button type="button" class="btn btn-secondary mb-3" data-toggle="modal" data-target="#modalSeletor">Escolher Foto</button>';
+    $output = '<button type="button" class="btn btn-secondary mb-3" data-toggle="modal" data-target="#modalSeletor"><i class="fa-solid fa-image"></i> Escolher Foto</button>';
     $output .= '<div class="modal fade" id="modalSeletor" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">';
     $output .= '<div class="modal-dialog modal-lg" role="document">';
     $output .= '<div class="modal-content">';

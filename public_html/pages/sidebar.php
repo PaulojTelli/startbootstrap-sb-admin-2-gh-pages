@@ -38,6 +38,12 @@
                     <span>Controle</span></a>
             </li>
 
+            <li class="nav-item">
+                <a class="nav-link" href="/public_html/pages/cadastrarap.php">
+                <i class="fa-regular fa-building"></i>
+                    <span>Cadastrar novo Ap</span></a>
+            </li>
+
 
 
             <!-- Sidebar Toggler (Sidebar) -->
