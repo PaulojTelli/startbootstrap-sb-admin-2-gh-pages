@@ -1,11 +1,8 @@
 #### a fazer
 
-
-opcao de atualizar varios pagamentos de uma vez na lista
+opcao ao atualizar pagamento de quanto o inquilino pagou, placeholder valor completo do aluguel
 
 IMPLEMENTAR TRATAMENTO DE DADOS!!!!! -feito em só em um form(copiar para os outros)
-
-historico de pagamento - feito só no db
 
 fotos dos inquilinos para cadastrar (funcao ja feita)
 
@@ -17,12 +14,19 @@ sistema de login
 
 todo o dasboard
 
+funcao novo mes
+
+registrar pagamento
+
+
+
 ##### feitos
 
 cadastro de apartamento - feito
 
 fazer pagina ap locados - feito(nao lembro oq é isso)
 
+historico de pagamento
 
 
 
