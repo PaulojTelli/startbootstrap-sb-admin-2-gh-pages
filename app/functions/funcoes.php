@@ -28,12 +28,9 @@ function vagarAp($id_apartamento)
 
 //  -------------------funcoes de historico------------//
 //historico de pagamento apartamento relacionado a inquilino
-function historicoPagamentoApI()
+function historicoPagamentoApI($id_inquilino,$id_apartamento)
 {
   global $servername, $username, $password, $dbname;
-
-  $id_inquilino = $_POST['id_inquilino'];
-  $id_apartamento = $_POST['id_apartamento'];
 
   try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
@@ -59,21 +56,23 @@ function historicoPagamentoApI()
     echo '<th>Sobrenome</th>';
     echo '<th>Apartamento</th>';
     echo '<th>Quantia Paga</th>';
-    echo '<th>Quantia Devida</th>';
+    echo '<th>Aluguel</th>';
     echo '<th>Atrasados</th>';
+    echo '<th>Total</th>';
     echo '</tr>';
     echo '</thead>';
     echo '<tbody>';
 
     foreach ($result as $row) {
-      $class = ($row['Quantia_Devida'] > 0) ? 'table-danger' : 'table-success';
+      $class = ($row['quantia_devida_acumulada'] > 0) ? 'table-danger' : 'table-success';
       echo '<tr class="' . $class . '">';
       echo '<td>' . $row['nome_inquilino'] . '</td>';
       echo '<td>' . $row['sobrenome_inquilino'] . '</td>';
       echo '<td>' . $row['apartamento'] . '</td>';
-      echo '<td>' . $row['Quantia_Paga'] . '</td>';
-      echo '<td>' . $row['Quantia_Devida'] . '</td>';
-      echo '<td>' . $row['Quantia_Acumulada'] . '</td>';
+      echo '<td>' . $row['quantia_paga'] . '</td>';
+      echo '<td>' . $row['quantia_devida']  . '</td>';
+      echo '<td>' . $row['quantia_devida_acumulada'] . '</td>';
+      echo '<td>' . $row['quantia_devida_acumulada'] + $row['quantia_devida']. '</td>';
       echo '</tr>';
     }
 
@@ -89,11 +88,11 @@ function historicoPagamentoApI()
 
 
 //historico de pagamentos de um inquilino
-function historicoPagamentoInq()
+function historicoPagamentoInq($id_inquilino)
 {
   global $servername, $username, $password, $dbname;
 
-  $id_inquilino = $_POST['id_inquilino'];
+
 
 
   try {
@@ -152,12 +151,9 @@ function historicoPagamentoInq()
 }
 
 //historico de pagamento geral do apartamento
-function historicoPagamentoAp()
+function historicoPagamentoAp($id_inquilino,$id_apartamento)
 {
   global $servername, $username, $password, $dbname;
-
-  $id_inquilino = $_POST['id_inquilino'];
-  $id_apartamento = $_POST['id_apartamento'];
 
   try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);

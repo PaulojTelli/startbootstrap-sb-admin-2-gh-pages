@@ -183,7 +183,7 @@ if ($result !== false) {
     </div>
   </div>
 
-
+<!-- cadastrar inquilino antigo -->
   <div class="card shadow mb-4">
 
     <!-- Card Header - Accordion -->
@@ -199,7 +199,25 @@ if ($result !== false) {
     </div>
   </div>
 
+  <!-- ver histórico -->
+  <div class="card shadow mb-4">
 
+<!-- Card Header - Accordion -->
+<a href="#collapseCardExample3" class="d-block card-header py-3" data-toggle="collapse" role="button"
+  aria-expanded="true" aria-controls="collapseCardExample3">
+  <h6 class="m-0 font-weight-bold text-primary">Histórico de Pagamentos</h6>
+</a>
+<!-- Card Content - Collapse -->
+<div class="collapse hide" id="collapseCardExample3">
+  <div class="card-body">
+  <?php historicoPagamentoApI($id_inquilino,$id) ?>
+  </div>
+</div>
+</div>
+
+
+
+<!-- botao mudar para vago -->
   <?php if ($result !== false) {
     echo "
     <form id='retirar_inquilino_form' action='\public_html\control"; ?>\retirar_inquilino.php'

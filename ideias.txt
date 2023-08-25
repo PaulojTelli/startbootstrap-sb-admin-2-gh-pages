@@ -7,13 +7,15 @@ IMPLEMENTAR TRATAMENTO DE DADOS!!!!! -feito em só em um form(copiar para os out
 
 historico de pagamento - feito só no db
 
+fotos dos inquilinos para cadastrar (funcao ja feita)
+
 lista de inquilinos
 
 pagina de consulta dos inquilinos (ver aluguel, vencimento, histórico, contato, pagar aluguel)
 
 sistema de login
 
-
+todo o dasboard
 
 ##### feitos
 
