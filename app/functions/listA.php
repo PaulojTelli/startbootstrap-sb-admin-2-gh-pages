@@ -56,12 +56,13 @@ function listA()
                                    preco: R$:{$row['preco']} - Atrasado {$dias} dias <i class='fa-solid fa-triangle-exclamation'></i> <br>
                                    Ap:  {$row['apartamento']} <br>
                                    Dia de Vencimento:  {$row['vencimento_dia']} <br>
-
+                                   
+                                   <div></div>
               <a class='btn btn-primary' target='_blank' href='https://api.whatsapp.com/send?phone=55{$row['telefone']}&text=Bom+dia%2C+{$row['nome']}.+Seu+preco+esta+atrasado+{$dias}+dias%2C+e+por+isso+gerou+multa.+O+valor+atual+do+preco+%C3%A9+R%24{$total}' role='button'>Enviar Mensagem <i class='fa-brands fa-whatsapp'></i></a>
 
               <a class='btn btn-primary' href='\public_html\pages\perfilAp.php?id=$id.php' role='button'>Abrir Perfil <i class='fa-regular fa-address-card'></i></a>
 
-              <a id='btnPagre' class='btn btn-primary' href='/public_html/pages/pay.php?id=$id' role='button'>Registrar Pagamento <i class='fa-solid fa-cash-register'></i></a>
+              <a id='btnPagre' class='btn btn-primary' href='/public_html/control/pay.php?id=$id' role='button'>Registrar Pagamento <i class='fa-solid fa-cash-register'></i></a>
           </form>
            </div>
          </div>

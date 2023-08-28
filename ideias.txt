@@ -18,6 +18,16 @@ funcao novo mes
 
 registrar pagamento
 
+<!--
+implementar novas funcoes;
+ registro historico de pagamentos de todos os aps no mes/ano em questao
+ resetar lista de pagos
+ adicionar contador "meses nao pagos" pra quem nao pagou - implicaria em adicionar coisa no banco de dados ja feito
+ historico atual sera puxado direto da lista atual, funcao listT()
+ adicionar um lugar onde possa ser setado gastos fixos e ocasionais para controlar finanças
+ -->
+
+
 
 
 ##### feitos

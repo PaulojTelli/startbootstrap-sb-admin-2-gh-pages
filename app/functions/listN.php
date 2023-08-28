@@ -55,10 +55,12 @@ function listN()
                                    Nome:  {$row['nome']} <br>
                                    preco: R$:{$row['preco']} - Devendo <i class='fa-regular fa-bell'></i> <br>
                                    Ap:  {$row['apartamento']} <br>
-                                   Dia de Vencimento:  {$row['vencimento_dia']} <br>
+                                   Dia de Vencimento:  {$row['vencimento_dia']}
+
+                                   <div></div>
                                    <a class='btn btn-primary' target='_blank' href='https://api.whatsapp.com/send?phone=55{$row['telefone']}&text=Bom+dia%2C+{$row['nome']}.+Pague+o+seu+preco+no+valor+de+R%24%3A{$row['preco']}%2C+antes+que+gere+multa' role='button'>Enviar Mensagem <i class='fa-brands fa-whatsapp'></i></a>
                                    <a class='btn btn-primary' href='\public_html\pages\perfilAp.php?id=$id.php' role='button'>Abrir Perfil <i class='fa-regular fa-address-card'></i></a>
-                                   <a id='btnPagre' class='btn btn-primary' href='/public_html/pages/pay.php?id=$id' role='button'>Registrar Pagamento <i class='fa-solid fa-cash-register'></i></a>
+                                   <a id='btnPagre' class='btn btn-primary' href='/public_html/control/pay.php?id=$id' role='button'>Registrar Pagamento <i class='fa-solid fa-cash-register'></i></a>
            </div>
          </div>
           </td>

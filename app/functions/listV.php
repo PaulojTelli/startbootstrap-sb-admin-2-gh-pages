@@ -59,7 +59,9 @@ function listV()
              <h5 class='card-title'>Apartamento Vago</h5>
              <p class='card-text'>
                                    Endereço: {$row['endereco']}<br>
-                                   Aluguel: R$:{$row['preco']} <br>
+                                   Aluguel: R$:{$row['preco']}
+
+                                   <div></div>
                                    <a style='margin-top:15px;' class='btn btn-primary' href='\public_html\pages\perfilAp.php?id=$id.php' role='button'>Abrir Perfil <i class='fa-regular fa-address-card'></i></a>
            </div>
          </div>
