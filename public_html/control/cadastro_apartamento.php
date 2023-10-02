@@ -11,8 +11,6 @@ if (!$foto_ap) {
     $foto_ap = "/img/fotoAp/residential.png";
 }
 
-
-
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -27,7 +25,11 @@ try {
     $stmt->bindParam(':foto_ap', $foto_ap);
     $stmt->execute();
     echo "Deu boa";
-
+?>
+    <script>
+        window.history.back();
+    </script>
+<?php
 } catch (PDOException $e) {
     echo "Error: " . $e->getMessage();
 }

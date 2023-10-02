@@ -1,4 +1,4 @@
-<?php require 'header.php' ?>
+<?php require '../pages/header.php' ?>
 <?php
 $id = $_GET['id'];
 
@@ -6,7 +6,6 @@ $id = $_GET['id'];
 try {
   $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
   $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
 } catch (PDOException $e) {
   echo "Conexão falhou: " . $e->getMessage();
 }
@@ -21,4 +20,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
 $conn = null;
 ?>
-<script>window.history.back();</script>
+<script>
+  window.history.back();
+</script>
