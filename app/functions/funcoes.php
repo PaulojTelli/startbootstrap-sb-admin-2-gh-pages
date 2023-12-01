@@ -13,7 +13,6 @@ function vagarAp($id_apartamento)
   try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
   } catch (PDOException $e) {
     echo "Conexão falhou: " . $e->getMessage();
   }
@@ -28,7 +27,7 @@ function vagarAp($id_apartamento)
 
 //  -------------------funcoes de historico------------//
 //historico de pagamento apartamento relacionado a inquilino
-function historicoPagamentoApI($id_inquilino,$id_apartamento)
+function historicoPagamentoApI($id_inquilino, $id_apartamento)
 {
   global $servername, $username, $password, $dbname;
 
@@ -36,11 +35,12 @@ function historicoPagamentoApI($id_inquilino,$id_apartamento)
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $sql = "SELECT hp.*, a.apartamento, i.nome AS nome_inquilino, i.sobrenome AS sobrenome_inquilino
+    $sql = "SELECT hp.id, hp.id_apartamento, hp.id_inquilino, hp.data_pagamento, hp.quantia_paga, hp.quantia_devida, hp.quantia_devida_acumulada, hp.quantia_restante, a.apartamento, i.nome AS nome_inquilino, i.sobrenome AS sobrenome_inquilino
             FROM historico_pagamentos AS hp
             JOIN apartamento AS a ON hp.id_apartamento = a.id
             JOIN inquilinos AS i ON hp.id_inquilino = i.id
-            WHERE hp.id_apartamento = :id_apartamento AND hp.id_inquilino = :id_inquilino";
+            WHERE hp.id_apartamento = :id_apartamento AND hp.id_inquilino = :id_inquilino
+            ORDER BY hp.data_pagamento ASC";
 
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(':id_apartamento', $id_apartamento, PDO::PARAM_INT);
@@ -49,42 +49,73 @@ function historicoPagamentoApI($id_inquilino,$id_apartamento)
 
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+    $totalAtrasado = 0;
+
     echo '<table class="table">';
     echo '<thead class="thead-dark">';
     echo '<tr>';
     echo '<th>Nome</th>';
     echo '<th>Sobrenome</th>';
     echo '<th>Apartamento</th>';
+    echo '<th>Data de Pagamento</th>';
+    echo '<th>Quantia Devida</th>';
     echo '<th>Quantia Paga</th>';
-    echo '<th>Aluguel</th>';
-    echo '<th>Atrasados</th>';
-    echo '<th>Total</th>';
+    echo '<th>Quantia Restante</th>';
     echo '</tr>';
     echo '</thead>';
     echo '<tbody>';
 
     foreach ($result as $row) {
-      $class = ($row['quantia_devida_acumulada'] > 0) ? 'table-danger' : 'table-success';
-      echo '<tr class="' . $class . '">';
+      $totalAtrasado += $row['quantia_restante']; // Acumulando o total atrasado
+      echo '<tr>';
       echo '<td>' . $row['nome_inquilino'] . '</td>';
       echo '<td>' . $row['sobrenome_inquilino'] . '</td>';
       echo '<td>' . $row['apartamento'] . '</td>';
-      echo '<td>' . $row['quantia_paga'] . '</td>';
-      echo '<td>' . $row['quantia_devida']  . '</td>';
-      echo '<td>' . $row['quantia_devida_acumulada'] . '</td>';
-      echo '<td>' . $row['quantia_devida_acumulada'] + $row['quantia_devida']. '</td>';
+      echo '<td>' . $row['data_pagamento'] . '</td>';
+      echo '<td>R$ ' . $row['quantia_devida']  . '</td>';
+      echo '<td>R$ ' . $row['quantia_paga'] . '</td>';
+      echo '<td>R$ ' . $row['quantia_restante'] . '</td>';
+      echo '<td>';
+      echo '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal' . $row['id'] . '">Editar</button>';
+      echo '</td>';
       echo '</tr>';
+
+      // Modal para edição
+      echo '<div class="modal fade" id="editModal' . $row['id'] . '" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">';
+      echo '<div class="modal-dialog" role="document">';
+      echo '<div class="modal-content">';
+      echo '<div class="modal-header">';
+      echo '<h5 class="modal-title" id="editModalLabel">Editar Quantia Restante</h5>';
+      echo '<button type="button" class="close" data-dismiss="modal" aria-label="Close">';
+      echo '<span aria-hidden="true">&times;</span>';
+      echo '</button>';
+      echo '</div>';
+      echo '<div class="modal-body">';
+      echo '<form action="/public_html/control/atualizar_historico.php" method="post">';
+      echo '<input type="hidden" name="id_historico" value="' . $row['id'] . '">';
+      echo '<div class="form-group">';
+      echo '<label for="quantia_restante">Quantia Restante:</label>';
+      echo '<input type="number" class="form-control" name="quantia_restante" id="quantia_restante" placeholder="R$ ' . $row['quantia_restante'] . '" step="0.01" required>';
+      echo '</div>';
+      echo '<button type="submit" class="btn btn-primary">Atualizar</button>';
+      echo '</form>';
+      echo '</div>';
+      echo '</div>';
+      echo '</div>';
+      echo '</div>';
     }
 
     echo '</tbody>';
     echo '</table>';
 
+    // Exibindo o total atrasado
+    echo "<p>Total Atrasado: R$ " . $totalAtrasado . "</p>";
   } catch (PDOException $e) {
     echo "Erro: " . $e->getMessage();
   }
+
+  $conn = null;
 }
-
-
 
 
 //historico de pagamentos de um inquilino
@@ -122,7 +153,6 @@ function historicoPagamentoInq($id_inquilino)
     echo '<tr>';
 
     echo '<th>Apartamento</th>';
-    echo '<th>Mes Referente</th>';
     echo '<th>Quantia Paga</th>';
     echo '<th>Quantia Devida</th>';
     echo '<th>Atrasados</th>';
@@ -135,7 +165,6 @@ function historicoPagamentoInq($id_inquilino)
       echo '<tr class="' . $class . '">';
 
       echo '<td>' . $row['apartamento'] . '</td>';
-      echo '<td>' . $row['mes_referente'] . '</td>';
       echo '<td>' . $row['quantia_paga'] . '</td>';
       echo '<td>' . $row['quantia_devida'] . '</td>';
       echo '<td>' . $row['quantia_devida_acumulada'] . '</td>';
@@ -144,14 +173,13 @@ function historicoPagamentoInq($id_inquilino)
 
     echo '</tbody>';
     echo '</table>';
-
   } catch (PDOException $e) {
     echo "Erro: " . $e->getMessage();
   }
 }
 
 //historico de pagamento geral do apartamento
-function historicoPagamentoAp($id_inquilino,$id_apartamento)
+function historicoPagamentoAp($id_inquilino, $id_apartamento)
 {
   global $servername, $username, $password, $dbname;
 
@@ -199,7 +227,6 @@ function historicoPagamentoAp($id_inquilino,$id_apartamento)
 
     echo '</tbody>';
     echo '</table>';
-
   } catch (PDOException $e) {
     echo "Erro: " . $e->getMessage();
   }
@@ -247,7 +274,3 @@ function listarInquilinos()
 
   $conexao = null;
 }
-
-
-?>
-

@@ -1,8 +1,8 @@
-<?php require $_SERVER['DOCUMENT_ROOT'] . '/public_html\pages\header.php' ?>
 <?php
+require $_SERVER['DOCUMENT_ROOT'] . '/public_html/pages/header.php';
+
 //parametros do DB
 global $servername, $username, $password, $dbname;
-
 
 try {
     $pdo = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
@@ -29,23 +29,20 @@ try {
     // ID do apartamento a ser atualizado
     $id_apartamento = $_POST['id_apartamento'];
 
-    // Atualizando a tabela apartamento com o novo ID do inquilino
-    $stmt = $pdo->prepare("UPDATE apartamento SET id_inquilino = :id_inquilino WHERE id = :id_apartamento");
+    // Atualizando a tabela apartamento com o novo ID do inquilino e definindo pago como 0
+    $sql = "UPDATE apartamento SET id_inquilino = :id_inquilino, locado = 1, vencimento_dia = :dia_pagamento, pago = 0 WHERE id = :id_apartamento";
+    $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':id_inquilino', $last_id_inquilino, PDO::PARAM_INT);
     $stmt->bindParam(':id_apartamento', $id_apartamento, PDO::PARAM_INT);
+    $stmt->bindParam(':dia_pagamento', $dia_pagamento, PDO::PARAM_INT);
     $stmt->execute();
-
-    //atualizar condicao de locado
-    $stmt = $pdo->prepare("UPDATE apartamento SET locado = 1, vencimento_dia = :dia_pagamento WHERE id = :id_apartamento");
-    $stmt->bindParam(':id_apartamento', $id_apartamento);
-    $stmt->bindParam(':dia_pagamento', $dia_pagamento);
-    $stmt->execute();
-
 } catch (PDOException $e) {
     echo "Error: " . $e->getMessage();
 }
 
-$conn = null;
+$pdo = null;
 
 ?>
-<script>window.history.back();</script>
+<script>
+    window.history.back();
+</script>

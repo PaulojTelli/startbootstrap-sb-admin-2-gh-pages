@@ -3,14 +3,11 @@
 function listA()
 {
 
-  global $servername,$username,$password,$dbname;
+  global $servername, $username, $password, $dbname;
 
   try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-
-
   } catch (PDOException $e) {
     echo "Conexão falhou: " . $e->getMessage();
   }
@@ -30,12 +27,12 @@ function listA()
     foreach ($result as $row) {
 
       $dias = date('d') - $row['vencimento_dia'];
-      $juros = $dias * 15;
-      $total = $juros + $row['preco'];
+      $juros = $row['preco'] * 0.1;
+      $valor_total = $juros + $row['preco'];
       $id = $row['id'];
 
       // Atrassado
-      if($dias > 0 && $row['pago'] == 0 && $row['locado'] == 1 ){
+      if ($dias > 0 && $row['pago'] == 0 && $row['locado'] == 1) {
 
         echo "
         <tr class='expandable-row table-danger' onclick='toggleRow(\"row-details-$id\")'>
@@ -43,7 +40,7 @@ function listA()
           <th>Apartamento:</th><td>{$row['apartamento']}</td>
           <th>Vencimento:</th><td>{$row['vencimento_dia']}</td>
           <th>Dias sem pagar:</th><td>{$dias}</td>
-          <th>Total devido:</th><td>{$total}</td>
+          <th>Total devido:</th><td>{$valor_total}</td>
         </tr>
         <tr class='hidden-row' id='row-details-$id' style='display: none;'>
           <td colspan='7'>
@@ -58,21 +55,47 @@ function listA()
                                    Dia de Vencimento:  {$row['vencimento_dia']} <br>
                                    
                                    <div></div>
-              <a class='btn btn-primary' target='_blank' href='https://api.whatsapp.com/send?phone=55{$row['telefone']}&text=Bom+dia%2C+{$row['nome']}.+Seu+preco+esta+atrasado+{$dias}+dias%2C+e+por+isso+gerou+multa.+O+valor+atual+do+preco+%C3%A9+R%24{$total}' role='button'>Enviar Mensagem <i class='fa-brands fa-whatsapp'></i></a>
+              <a class='btn btn-primary' target='_blank' href='https://api.whatsapp.com/send?phone=55{$row['telefone']}&text=Bom+dia%2C+{$row['nome']}.+Seu+preco+esta+atrasado+{$dias}+dias%2C+e+por+isso+gerou+multa.+O+valor+atual+do+preco+%C3%A9+R%24{$valor_total}' role='button'>Enviar Mensagem <i class='fa-brands fa-whatsapp'></i></a>
 
               <a class='btn btn-primary' href='\public_html\pages\perfilAp.php?id=$id.php' role='button'>Abrir Perfil <i class='fa-regular fa-address-card'></i></a>
 
-              <a id='btnPagre' class='btn btn-primary' href='/public_html/control/pay.php?id=$id' role='button'>Registrar Pagamento <i class='fa-solid fa-cash-register'></i></a>
+              <a id='btnPagre' class='btn btn-primary' data-toggle='modal' data-target='#modalPagamento' role='button'>
+                Registrar Pagamento <i class='fa-solid fa-cash-register'></i>
+              </a>
+
+              <!-- Modal para o pagamento -->
+              <div class='modal fade' id='modalPagamento' tabindex='-1' role='dialog' aria-labelledby='modalPagamentoLabel' aria-hidden='true'>
+                <div class='modal-dialog' role='document'>
+                  <div class='modal-content'>
+                    <div class='modal-header'>
+                      <h5 class='modal-title' id='modalPagamentoLabel'>Registrar Pagamento</h5>
+                      <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+                        <span aria-hidden='true'>&times;</span>
+                      </button>
+                    </div>
+                    <div class='modal-body'>
+                      <form action='/public_html/control/pay.php' method='POST'>
+                        <div class='form-group'>
+                          <p>Quantida Devida: $valor_total</p>
+                          <label for='quantia_paga'>Quantia Paga</label>
+                          <input type='number' class='form-control' id='quantia_paga' name='quantia_paga' required>
+                        </div>
+                        <input type='hidden' name='id' value='$id'>
+                        <input type='hidden' name='valor_total' id='valor_total' value='$valor_total'>
+                        <button type='submit' class='btn btn-primary'>Confirmar Pagamento</button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
           </form>
            </div>
          </div>
           </td>
         </tr>";
       }
-
-
     }
-
   }
 
 
@@ -82,20 +105,20 @@ function listA()
 ?>
 <!-- Form menu escondido -->
 <script>
-function toggleRow(id) {
-  var row = document.getElementById(id);
-  if (row.style.display === 'none') {
-    row.style.display = 'table-row';
-  } else {
-    row.style.display = 'none';
+  function toggleRow(id) {
+    var row = document.getElementById(id);
+    if (row.style.display === 'none') {
+      row.style.display = 'table-row';
+    } else {
+      row.style.display = 'none';
+    }
   }
-}
 </script>
 <!-- enviar id pelo botao -->
-<script>
-    function enviarID() {
-      var id = '<?php echo $row['id']; ?>';
-      document.getElementById('idInput').value = id;
-      document.getElementById('formPagre').submit();
-    }
-  </script>
+<!-- <script>
+  function enviarID() {
+    var id = '<?php echo $row['id']; ?>';
+    document.getElementById('idInput').value = id;
+    document.getElementById('formPagre').submit();
+  }
+</script> -->

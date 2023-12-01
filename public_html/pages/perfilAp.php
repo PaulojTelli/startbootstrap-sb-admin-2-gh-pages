@@ -34,50 +34,40 @@ if ($result !== false) {
       <div class='container'>
         <div class='row'>
           <div class='col-md-3'>
-            <img src='\img\fotoAp/<?php echo $result['foto_ap'] ?>' class='img-fluid' alt='Foto do apartamento'>
+            <img src='/img/fotoAp/<?php echo $result['foto_ap'] ?>' class='img-fluid' alt='Foto do apartamento'>
           </div>
           <div class='col-md-9'>
 
             <p>
               <nobr>
                 <form id='apartamentoForm' action='/public_html\control\atualizar_apartamento.php' method='post'>
-                  <button type='button' id='editBtn' class='btn btn-outline-secondary float-right'><i
-                      class='fa-solid fa-gear'></i></button>
-                  <button type='submit' id='saveBtn' class='btn btn-outline-secondary float-right'
-                    style='display: none;'><i class='fa-regular fa-circle-check'></i>
-                    </i></button>
+                  <button type='button' id='editBtn' class='btn btn-outline-secondary float-right'><i class='fa-solid fa-gear'></i></button>
+                  <button type='submit' id='saveBtn' class='btn btn-outline-secondary float-right' style='display: none;'><i class='fa-regular fa-circle-check'></i></button>
 
-                  Endereço: <input type='text' class='invisible-input' name='endereco'
-                    value="<?php echo $result['endereco'] ?>" disabled><br>
-                  Aluguel: <input type='number' step='0.01' class='invisible-input' name='preco'
-                    value="<?php echo $result['preco'] ?>" disabled><br>
-                  Apartamento: <input type='number' class='invisible-input' name='apartamento'
-                    value="<?php echo $result['apartamento'] ?>" disabled><br>
+                  Endereço: <input type='text' class='invisible-input' name='endereco' value="<?php echo $result['endereco'] ?>" disabled><br>
+                  Aluguel: <input type='number' step='0.01' class='invisible-input' name='preco' value="<?php echo $result['preco'] ?>" disabled><br>
+                  Apartamento: <input type='number' class='invisible-input' name='apartamento' value="<?php echo $result['apartamento'] ?>" disabled><br>
+                  Dia de Vencimento: <input type='number' class='invisible-input' name='vencimento_dia' value="<?php echo $result['vencimento_dia'] ?>" disabled><br>
                   <input type='hidden' name='id_apartamento' value="<?php echo $id ?>" required>
-
                 </form>
+
               </nobr>
 
               <hr>
 
             <form id='inquilinoForm' action='/public_html\control\atualizar_inquilino.php' method='post' style=" <?php if ($result['locado'] == 0) {
-              echo " display:none;";
-            } ?>">
+                                                                                                                    echo " display:none;";
+                                                                                                                  } ?>">
               <input type='hidden' name='id_inquilino' value='<?php echo $id_inquilino; ?>' required>
 
-              <button type='button' id='editBtnInquilino' class='btn btn-outline-secondary float-right'
-                style='border:none;'><i class='fa-solid fa-gear'></i></button>
+              <button type='button' id='editBtnInquilino' class='btn btn-outline-secondary float-right' style='border:none;'><i class='fa-solid fa-gear'></i></button>
 
-              <button type='submit' id='saveBtnInquilino' class='btn btn-outline-secondary float-right' value='Salvar'
-                style='display: none;'><i class='fa-regular fa-circle-check'></i></button>
+              <button type='submit' id='saveBtnInquilino' class='btn btn-outline-secondary float-right' value='Salvar' style='display: none;'><i class='fa-regular fa-circle-check'></i></button>
               <nobr>
-                Nome: <input type='text' class='invisible-input' name='nome' value='<?php echo $result['nome'] ?>'
-                  disabled><br>
-                Sobrenome: <input type='text' class='invisible-input' name='sobrenome'
-                  value='<?php echo $result['sobrenome'] ?>' disabled><br>
+                Nome: <input type='text' class='invisible-input' name='nome' value='<?php echo $result['nome'] ?>' disabled><br>
+                Sobrenome: <input type='text' class='invisible-input' name='sobrenome' value='<?php echo $result['sobrenome'] ?>' disabled><br>
 
-                Telefone: <input type='text' class='invisible-input' name='telefone'
-                  value='<?php echo $result['telefone'] ?>' disabled><br>
+                Telefone: <input type='text' class='invisible-input' name='telefone' value='<?php echo $result['telefone'] ?>' disabled><br>
 
             </form>
             </p>
@@ -91,8 +81,8 @@ if ($result !== false) {
 
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <script>
-    $(document).ready(function () {
-      $('#editBtn').on('click', function () {
+    $(document).ready(function() {
+      $('#editBtn').on('click', function() {
         $('#apartamentoForm input').prop('disabled', false);
         $('#apartamentoForm input').addClass('form-control');
         $('#saveBtn').show();
@@ -100,17 +90,16 @@ if ($result !== false) {
       });
 
 
-      $('#editBtnInquilino').on('click', function () {
+      $('#editBtnInquilino').on('click', function() {
         $('#inquilinoForm input').prop('disabled', false);
         $('#inquilinoForm input').addClass('form-control');
         $('#saveBtnInquilino').show();
         $(this).hide();
       });
     });
-    $("#inquilinoForm").submit(function () {
+    $("#inquilinoForm").submit(function() {
       $(".invisible-input").prop('disabled', false);
     });
-
   </script>
 
   <style>
@@ -130,8 +119,7 @@ if ($result !== false) {
   <div class="card shadow mb-4" style="margin-top:25px;
    ">
     <!-- Card Header - Accordion -->
-    <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button"
-      aria-expanded="true" aria-controls="collapseCardExample">
+    <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
       <h6 class="m-0 font-weight-bold text-primary">Cadastrar Novo Inquilino</h6>
     </a>
     <!-- Card Content - Collapse -->
@@ -146,7 +134,7 @@ if ($result !== false) {
           <h2>Formulário de Cadastro de Inquilino</h2>
 
           <form action="\public_html\control\cadastro_inquilino.php" method="post">
-            <!-- <input type="hidden" name="id_inquilino" value="<?php /*echo $result['id_inquilino']*/?>" required> -->
+            <!-- <input type="hidden" name="id_inquilino" value="<?php /*echo $result['id_inquilino']*/ ?>" required> -->
             <input type="hidden" name="id_apartamento" value="<?php echo $id ?>" required>
 
             <div class="form-group">
@@ -161,7 +149,7 @@ if ($result !== false) {
 
             <div class="form-group">
               <label for="telefone">Telefone:</label>
-              <input type="text" class="form-control" id="telefone" name="telefone" required>
+              <input type="number" class="form-control" id="telefone" name="telefone" required>
             </div>
 
             <div class="form-group">
@@ -183,12 +171,11 @@ if ($result !== false) {
     </div>
   </div>
 
-<!-- cadastrar inquilino antigo -->
+  <!-- cadastrar inquilino antigo -->
   <div class="card shadow mb-4">
 
     <!-- Card Header - Accordion -->
-    <a href="#collapseCardExample2" class="d-block card-header py-3" data-toggle="collapse" role="button"
-      aria-expanded="true" aria-controls="collapseCardExample2">
+    <a href="#collapseCardExample2" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample2">
       <h6 class="m-0 font-weight-bold text-primary">Cadastrar Inquilino Antigo</h6>
     </a>
     <!-- Card Content - Collapse -->
@@ -202,40 +189,39 @@ if ($result !== false) {
   <!-- ver histórico -->
   <div class="card shadow mb-4">
 
-<!-- Card Header - Accordion -->
-<a href="#collapseCardExample3" class="d-block card-header py-3" data-toggle="collapse" role="button"
-  aria-expanded="true" aria-controls="collapseCardExample3">
-  <h6 class="m-0 font-weight-bold text-primary">Histórico de Pagamentos</h6>
-</a>
-<!-- Card Content - Collapse -->
-<div class="collapse hide" id="collapseCardExample3">
-  <div class="card-body">
-  <?php historicoPagamentoApI($id_inquilino,$id) ?>
+    <!-- Card Header - Accordion -->
+    <a href="#collapseCardExample3" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample3">
+      <h6 class="m-0 font-weight-bold text-primary">Histórico de Pagamentos</h6>
+    </a>
+    <!-- Card Content - Collapse -->
+    <div class="collapse hide" id="collapseCardExample3">
+      <div class="card-body">
+        <?php historicoPagamentoApI($id_inquilino, $id) ?>
+      </div>
+    </div>
   </div>
-</div>
-</div>
 
 
 
-<!-- botao mudar para vago -->
+  <!-- botao mudar para vago -->
   <?php if ($result !== false) {
     echo "
     <form id='retirar_inquilino_form' action='\public_html\control"; ?>\retirar_inquilino.php'
-    <?php echo " method='post'>
+<?php echo " method='post'>
     <input type='hidden' name='id_inquilino' value='{$result['id_inquilino']}' required>
     <input type='hidden' name='id_apartamento' value='{$id}' required>
     <button type='submit' class='btn btn-primary'>Mudar para Vago</button>
 </form>'";
   } ?>
 
-  <script type="text/javascript">
-    document.getElementById("retirar_inquilino_form").addEventListener("submit", function (event) {
-      var result = confirm("Tem certeza que deseja mudar para vago?");
-      if (!result) {
-        event.preventDefault();
-      }
-    });
-  </script>
+<script type="text/javascript">
+  document.getElementById("retirar_inquilino_form").addEventListener("submit", function(event) {
+    var result = confirm("Tem certeza que deseja mudar para vago?");
+    if (!result) {
+      event.preventDefault();
+    }
+  });
+</script>
 
 </div>
 
