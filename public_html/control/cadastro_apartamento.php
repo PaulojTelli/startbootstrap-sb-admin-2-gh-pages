@@ -27,7 +27,6 @@ try {
     $stmt->bindParam(':foto_ap', $foto_ap);
     $stmt->execute();
     echo "Deu boa";
-
 } catch (PDOException $e) {
     echo "Error: " . $e->getMessage();
 }

@@ -22,10 +22,11 @@ function fotoAp($dir = '../../img/fotoAp/')
     $output .= '</div><div class="col-4 text-center">';
     $output .= '<img id="miniatura" src="placeholder.png" class="img-thumbnail" alt="Miniatura" style="width: 250px; height: 250px;">';
     $output .= '<button type="button" class="btn btn-success" style="margin-top: 10px;" data-dismiss="modal">Confirmar</button>';
+
     $output .= '</div></div></div><div class="modal-footer">';
+
+
     $output .= '</div></div></div></div>';
 
     return $output;
 }
-?>
-

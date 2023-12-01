@@ -15,14 +15,12 @@
 
                 <!-- Nav Item - User Information -->
                 <li class="nav-item dropdown no-arrow">
-                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
                         <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
                     </a>
                     <!-- Dropdown - User Information -->
-                    <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                        aria-labelledby="userDropdown">
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                         <a class="dropdown-item" href="#">
                             <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                             Profile
@@ -69,8 +67,7 @@
                     <form method="get" action="list.php">
                         <button class="btn btn-primary" type="submit" name="categoria" value="todos">Todos</button>
                         <button class="btn btn-primary" type="submit" name="categoria" value="pago">Pagos</button>
-                        <button class="btn btn-primary" type="submit" name="categoria"
-                            value="atrasado">Atrasados</button>
+                        <button class="btn btn-primary" type="submit" name="categoria" value="atrasado">Atrasados</button>
                         <button class="btn btn-primary" type="submit" name="categoria" value="naoVencido">Não
                             Vencido</button>
                         <button class="btn btn-primary" type="submit" name="categoria" value="vago">Vagos</button>
@@ -79,17 +76,15 @@
 
                 <div class="bg-white py-2 collapse-inner rounded">
 
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFuncoes"
-                        aria-expanded="true" aria-controls="collapseFuncoes">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFuncoes" aria-expanded="true" aria-controls="collapseFuncoes">
                         <i class="fas fa-fw fa-wrench"></i>
                         <span>Funções</span>
                     </a>
-                    <div id="collapseFuncoes" class="collapse" aria-labelledby="headingFuncoes"
-                        data-parent="#accordionSidebar">
+                    <div id="collapseFuncoes" class="collapse" aria-labelledby="headingFuncoes" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
 
                             <form method="post" id="novo_mes_form">
-                                <button type="submit" class="btn btn-primary mb-2" name="executar_funcao">Iniciar Novo
+                                <button type="submit" class="btn btn-primary mb-2" name="executar_funcao">Encerrar
                                     Mês <i class="fa-regular fa-calendar-check"></i></button>
                             </form>
 
@@ -97,8 +92,8 @@
 
 
                             <script type="text/javascript">
-                                document.getElementById("novo_mes_form").addEventListener("submit", function (event) {
-                                    var result = confirm("Tem certeza que deseja iniciar um novo mês?");
+                                document.getElementById("novo_mes_form").addEventListener("submit", function(event) {
+                                    var result = confirm("Tem certeza que deseja encerrar o mês?");
                                     if (!result) {
                                         event.preventDefault();
                                     }
@@ -107,7 +102,7 @@
 
                             <?php
                             if (isset($_POST['executar_funcao'])) {
-                                novoMes();
+                                encerrarMes();
                             } ?>
 
 
@@ -149,7 +144,6 @@
                                     default:
                                         listT();
                                         break;
-
                                 }
                             }
 
@@ -167,4 +161,4 @@
     </div>
     <!-- End of Main Content -->
 
-   <?php require 'footer.php'; ?>
+    <?php require 'footer.php'; ?>
