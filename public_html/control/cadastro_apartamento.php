@@ -11,8 +11,6 @@ if (!$foto_ap) {
     $foto_ap = "/img/fotoAp/residential.png";
 }
 
-
-
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

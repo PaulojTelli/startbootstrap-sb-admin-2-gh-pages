@@ -75,30 +75,22 @@ function historicoPagamentoApI($id_inquilino, $id_apartamento)
       echo '<td>R$ ' . $row['quantia_devida']  . '</td>';
       echo '<td>R$ ' . $row['quantia_paga'] . '</td>';
       echo '<td>R$ ' . $row['quantia_restante'] . '</td>';
-      echo '<td>';
-      echo '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal' . $row['id'] . '">Editar</button>';
-      echo '</td>';
-      echo '</tr>';
+
 
       // Modal para edição
-      echo '<div class="modal fade" id="editModal' . $row['id'] . '" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">';
-      echo '<div class="modal-dialog" role="document">';
-      echo '<div class="modal-content">';
-      echo '<div class="modal-header">';
-      echo '<h5 class="modal-title" id="editModalLabel">Editar Quantia Restante</h5>';
-      echo '<button type="button" class="close" data-dismiss="modal" aria-label="Close">';
-      echo '<span aria-hidden="true">&times;</span>';
-      echo '</button>';
-      echo '</div>';
-      echo '<div class="modal-body">';
-      echo '<form action="/public_html/control/atualizar_historico.php" method="post">';
-      echo '<input type="hidden" name="id_historico" value="' . $row['id'] . '">';
-      echo '<div class="form-group">';
-      echo '<label for="quantia_restante">Quantia Restante:</label>';
-      echo '<input type="number" class="form-control" name="quantia_restante" id="quantia_restante" placeholder="R$ ' . $row['quantia_restante'] . '" step="0.01" required>';
-      echo '</div>';
-      echo '<button type="submit" class="btn btn-primary">Atualizar</button>';
-      echo '</form>';
+      if ($row['quantia_restante'] > 0) {
+        echo '<td>';
+        echo '<form action="/public_html/control/atualizar_historico.php" method="post">';
+        echo '<input type="hidden" name="id_historico" value="' . $row['id'] . '">';
+        echo '<button type="submit" class="btn btn-primary">Zerar Dívida</button>';
+        echo '</form>';
+        echo '</td>';
+      } else {
+        echo '<td> - </td>'; // Ou algum outro conteúdo caso não haja dívida
+      }
+
+      echo '</tr>';
+
       echo '</div>';
       echo '</div>';
       echo '</div>';

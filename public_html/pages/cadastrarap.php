@@ -21,7 +21,9 @@ $imagens = glob($dir . "*.{jpg,jpeg,png,gif}", GLOB_BRACE);
         </div>
         <div class="form-group">
             <label for="preco">Preço:</label>
-            <input type="number" class="form-control" id="preco" name="preco" required>
+            <input type="number" class="form-control" id="preco" name="preco" step="0.01" min="0" required>
+
+
         </div>
         <div class="form-group mt-4">
             <label for="foto_ap">
@@ -34,38 +36,6 @@ $imagens = glob($dir . "*.{jpg,jpeg,png,gif}", GLOB_BRACE);
 </div>
 </div>
 
-<script>
-    document.getElementById('uploadBtn').addEventListener('click', function() {
-        var formData = new FormData(document.getElementById('uploadForm'));
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', '/public_html/control/upload_foto_ap.php', true);
-
-        xhr.onload = function() {
-            if (this.status == 200) {
-                // Atualizar a lista de imagens
-                atualizarListaImagens();
-            } else {
-                alert('Erro no upload da imagem.');
-            }
-        };
-
-        xhr.send(formData);
-    });
-
-    function atualizarListaImagens() {
-        // Enviar requisição AJAX para obter a lista atualizada de imagens
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', '/public_html/control/listar_imagens.php', true);
-
-        xhr.onload = function() {
-            if (this.status == 200) {
-                document.getElementById('listaImagens').innerHTML = this.responseText;
-            }
-        };
-
-        xhr.send();
-    }
-</script>
 
 
 

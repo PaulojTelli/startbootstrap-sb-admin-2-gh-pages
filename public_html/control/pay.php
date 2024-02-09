@@ -1,3 +1,4 @@
+<?php require '../pages/header.php' ?>
 <?php
 require $_SERVER['DOCUMENT_ROOT'] . '/public_html/pages/header.php';
 

@@ -29,7 +29,7 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Separador
+
             </div>
 
             <li class="nav-item">
@@ -40,7 +40,7 @@
 
             <li class="nav-item">
                 <a class="nav-link" href="/public_html/pages/cadastrarap.php">
-                <i class="fa-regular fa-building"></i>
+                    <i class="fa-regular fa-building"></i>
                     <span>Cadastrar novo Ap</span></a>
             </li>
 

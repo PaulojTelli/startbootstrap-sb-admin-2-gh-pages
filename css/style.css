@@ -1,3 +1,32 @@
-.btn-card{
+.btn-card {
   margin-top: 15px;
+}
+
+#titulodashboard h2 {
+  margin-bottom: 78px;
+  margin-top: 44px;
+}
+
+#profitChart {
+  height: 400px;
+}
+
+#graficos2{
+  margin-top: 96px;
+}
+
+#barraapslocados{
+  margin-top: 62px;
+}
+
+#alertaspag{
+  margin-top: 188px;
+}
+
+#anotacoes textarea{
+  height: 400px; 
+}
+
+#anotacaocard .card-body {
+  padding:0;
 }
